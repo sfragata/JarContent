@@ -57,7 +57,7 @@
 					</jnlp>
 					<sign>
 						<keystore>${project.basedir}/src/key/jarContent.jks</keystore>
-						<keypass>KEY</keypass>
+						<keypass>KEYPASS</keypass>
 						<storepass>STOREPASS</storepass>
 						<storetype>jks</storetype>
 						<alias>sendmail</alias>
@@ -82,6 +82,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -112,42 +118,43 @@
 			<version>1.2.17</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.swixml</groupId>
 			<artifactId>swixml</artifactId>
 			<version>1.5.144</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>ant</artifactId>
+					<groupId>ant</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>j2h</artifactId>
+					<groupId>java2html</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		
 		<!-- ADD THIS DEPENDENCY AFTER 
 		<dependency>
 			<groupId>br.com.sfragata</groupId>
 			<artifactId>Log4JManager</artifactId>
 			<version>1.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		 -->
+		-->
 	</dependencies>
 </project>
