@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="SITE_CODEBASE" href="$outputFile">
+	<information>
+		<title>Jar Content</title> 
+		<vendor>VENDOR</vendor>
+		<homepage href="HOMEPAGE"/>
+		<description kind="one-line">JarContent</description>
+		<description kind="short">Jar Content- A jar Finder tool.</description>
+		<description kind="tooltip">Jar Content- A jar Finder tool.</description>
+		<icon href="globe.jpg" kind="default"/>
+		<shortcut online="false"><desktop/><menu submenu="JarContent"/></shortcut>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.6+" initial-heap-size="64m" max-heap-size="256m" />
+		<property name="jnlp.versionEnabled" value="true"/>
+		$dependencies
+	</resources>
+	<application-desc main-class="$mainClass">
+	</application-desc>
+</jnlp>

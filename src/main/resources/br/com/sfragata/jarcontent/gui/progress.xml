@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<dialog Size="500,90" resizable="false" title="PROGRESS" alwaysontop="false"
+        defaultCloseOperation="JFrame.HIDE_ON_CLOSE" bundle="locale.messages">
+    <panel constraints="BorderLayout.NORTH" name="panelNorth"
+		layout="BorderLayout">
+        <label id="labelResult" text=""/>
+    </panel>
+    <panel constraints="BorderLayout.CENTER" name="panelCenter" layout="BorderLayout">
+        <progressbar id="progress" focusable="false" value="0" constraints="BorderLayout.NORTH"
+			maximumsize="100" minimumsize="0"
+			maximum="100" minimum="0" stringpainted="true" />
+    </panel>
+</dialog>

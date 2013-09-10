@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<frame xmlns="http://www.swixml.org/2007/Swixml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.swixml.org/2007/Swixml swixml.xsd "
+	defaultcloseoperation="JFrame.EXIT_ON_CLOSE" id="frame" resizable="true"
+	title="Jar Content" size="800, 600" bundle="locale.messages" >
+    <panel layout="BorderLayout" constraints="BorderLayout.NORTH">
+        <panel constraints="BorderLayout.NORTH" name="panelNorth"
+		layout="FlowLayout">
+            <label name="labelDir" text="DIR"/>
+            <textfield name="textFieldDir" columns="50" id="textFieldDir"/>
+            <button name="buttonOpen" text="OPEN" actioncommand="OPEN" mnemonic="VK_O"/>
+        </panel>
+        <panel constraints="BorderLayout.CENTER" name="panelCenter"
+		layout="FlowLayout">
+            <label name="labelClass" text="CLASS"/>
+            <textfield name="textFieldClass" columns="36" id="textFieldClass"/>
+            <checkbox text="IGNORE_CASE" mnemonic="VK_I" id="ignoreCase" ></checkbox>
+            <button name="buttonSearch" text="SEARCH" actioncommand="SEARCH" mnemonic="VK_S" defaultcapable="true"/>
+        </panel>
+    </panel>
+    <scrollpane constraints="BorderLayout.CENTER" name="panelCenter" wheelscrollingenabled="true"
+		layout="BorderLayout">
+        <table constraints="BorderLayout.CENTER" name="tableResult" id="tableFiles"
+			cellselectionenabled="false" autoresizemode="JTable.AUTO_RESIZE_LAST_COLUMN"
+			showhorizontallines="true" showverticallines="false" showgrid="true"
+			requestfocusenabled="false" rowselectionallowed="true"
+			columnselectionallowed="false" autocreatecolumnsfrommodel="true"
+			selectionmode="2" editingcolumn="false" />
+    </scrollpane>
+    <panel constraints="BorderLayout.SOUTH" name="panelSouth"
+		layout="BorderLayout">
+        <button constraints="BorderLayout.EAST" name="buttonSair"
+			text="QUIT" actioncommand="QUIT" mnemonic="VK_X"/>
+    </panel>
+</frame>
