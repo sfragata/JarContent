@@ -13,6 +13,7 @@ En donnant une 'string' (qui est le nom de la classe ou une partie de celui-ci o
 l'application va scanner dans un dossier pour toute la classe ou de package
 représentant la 'string'. cette analyse se fera uniquement sur​​ le fichiers .jar
 Il y a une version Java Webstart en https://sites.google.com/site/sfragata/launch.jnlp
+
 ===========
 Applicação que busca nome de classes dentro de um diretório
 Dada uma string (que representa o nome da classe ou parte dela ou do seu pacote),
