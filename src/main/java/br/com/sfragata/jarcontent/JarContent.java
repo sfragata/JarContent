@@ -27,7 +27,7 @@ import br.com.sfragata.jarcontent.listener.EventListener;
 import br.com.sfragata.jarcontent.to.JarContentTO;
 
 /**
- * Classe to searh class files into jar files
+ * Class to searh class files into jar files
  * 
  * @author Fragata da Silva, Silvio
  */
