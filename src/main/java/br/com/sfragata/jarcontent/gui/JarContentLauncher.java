@@ -5,7 +5,9 @@ package br.com.sfragata.jarcontent.gui;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import br.com.sfragata.jarcontent.config.JarContentConfig;
 
 /**
  * Main class to start the application
@@ -28,8 +30,8 @@ public class JarContentLauncher {
 					if (logger.isInfoEnabled()) {
 						logger.info("Starting application...");
 					}
-					new ClassPathXmlApplicationContext("applicationContext.xml")
-							.getBean("jarContentSwixml");
+					new AnnotationConfigApplicationContext(
+							JarContentConfig.class);
 				} catch (Exception e) {
 					logger.error(e);
 				}
