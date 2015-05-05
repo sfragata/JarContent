@@ -22,24 +22,35 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.2.10.RELEASE</spring.version>
+		<spring.version>3.2.13.RELEASE</spring.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<maven-source-plugin.version>2.4</maven-source-plugin.version>
+		<appassembler-maven-plugin.version>1.10</appassembler-maven-plugin.version>
+		<webstart-maven-plugin.version>1.0-beta-6</webstart-maven-plugin.version>
+		<junit.version>4.12</junit.version>
+		<log4j.version>1.2.17</log4j.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-logging.version>1.2</commons-logging.version>
+		<log4jmanager.version>1.0</log4jmanager.version>
+		<keytool-api-1.7.version>1.4</keytool-api-1.7.version>
+		<java.version>1.7</java.version>
 	</properties>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.0.4</version>
+				<version>${maven-source-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -53,7 +64,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>appassembler-maven-plugin</artifactId>
-				<version>1.4</version>
+				<version>${appassembler-maven-plugin.version}</version>
 				<configuration>
 					<programs>
 						<program>
@@ -73,20 +84,32 @@
 					<repositoryName>lib</repositoryName>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
-				<version>1.0-beta-3</version>
+				<version>${webstart-maven-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>webstart-pack200-impl</artifactId>
+						<version>${webstart-maven-plugin.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>keytool-api-1.7</artifactId>
+						<version>${keytool-api-1.7.version}</version>
+					</dependency>
+				</dependencies>
 				<configuration>
 					<jnlp>
-						<inputTemplate>src/jnlp/template.vm</inputTemplate>
+						<inputTemplate>template.vm</inputTemplate>
 						<mainClass>br.com.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
 					</jnlp>
 					<sign>
 						<keystore>${project.basedir}/src/key/jarContent.jks</keystore>
-						<keypass>KEYPASS</keypass>
-						<storepass>STOREPASS</storepass>
+						<keypass>keypass</keypass>
+						<storepass>storepass</storepass>
 						<storetype>jks</storetype>
 						<alias>sendmail</alias>
 						<verify>true</verify>
@@ -94,19 +117,16 @@
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-
-		<!-- Spring Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -139,12 +159,11 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Spring Framework fin -->
 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.swixml</groupId>
@@ -164,24 +183,17 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
+			<version>${commons-logging.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>br.com.sfragata</groupId>
 			<artifactId>Log4JManager</artifactId>
-			<version>1.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
+			<version>${log4jmanager.version}</version>
 		</dependency>
 	</dependencies>
 </project>
