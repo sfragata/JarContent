@@ -1,9 +1,9 @@
 /**
  * 
  */
-package br.com.sfragata.jarcontent.listener;
+package com.github.sfragata.jarcontent.listener;
 
-import br.com.sfragata.jarcontent.to.JarContentTO;
+import com.github.sfragata.jarcontent.to.JarContentTO;
 
 /**
  * Interface to trigger events to the GUI

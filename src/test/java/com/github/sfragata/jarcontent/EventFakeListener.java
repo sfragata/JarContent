@@ -1,9 +1,9 @@
-package br.com.sfragata.jarcontent;
+package com.github.sfragata.jarcontent;
 
 import org.springframework.stereotype.Component;
 
-import br.com.sfragata.jarcontent.listener.EventListener;
-import br.com.sfragata.jarcontent.to.JarContentTO;
+import com.github.sfragata.jarcontent.listener.EventListener;
+import com.github.sfragata.jarcontent.to.JarContentTO;
 
 /**
  * Fake Event Listener (for test case only)

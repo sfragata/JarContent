@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.sfragata.jarcontent;
+package com.github.sfragata.jarcontent;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -23,8 +23,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-import br.com.sfragata.jarcontent.listener.EventListener;
-import br.com.sfragata.jarcontent.to.JarContentTO;
+import com.github.sfragata.jarcontent.listener.EventListener;
+import com.github.sfragata.jarcontent.to.JarContentTO;
 
 /**
  * Class to searh class files into jar files

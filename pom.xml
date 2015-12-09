@@ -34,6 +34,7 @@
 		<log4jmanager.version>1.0</log4jmanager.version>
 		<keytool-api-1.7.version>1.4</keytool-api-1.7.version>
 		<java.version>1.7</java.version>
+		<swixml-version>1.5.144</swixml-version>
 	</properties>
 	<build>
 		<plugins>
@@ -68,7 +69,7 @@
 				<configuration>
 					<programs>
 						<program>
-							<mainClass>br.com.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
+							<mainClass>com.github.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
 							<name>jarcontent</name>
 						</program>
 					</programs>
@@ -104,7 +105,7 @@
 				<configuration>
 					<jnlp>
 						<inputTemplate>template.vm</inputTemplate>
-						<mainClass>br.com.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
+						<mainClass>com.github.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
 					</jnlp>
 					<sign>
 						<keystore>${project.basedir}/src/key/jarContent.jks</keystore>
@@ -168,7 +169,7 @@
 		<dependency>
 			<groupId>org.swixml</groupId>
 			<artifactId>swixml</artifactId>
-			<version>1.5.144</version>
+			<version>${swixml-version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>ant</artifactId>

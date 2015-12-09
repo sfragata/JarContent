@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.sfragata.jarcontent.config;
+package com.github.sfragata.jarcontent.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +17,7 @@ import org.swixml.SwingEngine;
  * 
  */
 @Configuration
-@ComponentScan(basePackages = { "br.com.sfragata" })
+@ComponentScan(basePackages = { "com.github.sfragata" })
 @EnableMBeanExport
 public class JarContentConfig {
 

@@ -1,13 +1,13 @@
 /**
  * 
  */
-package br.com.sfragata.jarcontent.gui;
+package com.github.sfragata.jarcontent.gui;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import br.com.sfragata.jarcontent.config.JarContentConfig;
+import com.github.sfragata.jarcontent.config.JarContentConfig;
 
 /**
  * Main class to start the application
@@ -24,6 +24,7 @@ public class JarContentLauncher {
 	 */
 	public static void main(String[] args) {
 		Thread t = new Thread(new Runnable() {
+			@SuppressWarnings("resource")
 			@Override
 			public void run() {
 				try {

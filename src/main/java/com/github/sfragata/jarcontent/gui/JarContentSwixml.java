@@ -1,4 +1,4 @@
-package br.com.sfragata.jarcontent.gui;
+package com.github.sfragata.jarcontent.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,10 +27,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
-import br.com.sfragata.jarcontent.JarContent;
-import br.com.sfragata.jarcontent.gui.tablemodel.JarContentTableModel;
-import br.com.sfragata.jarcontent.listener.EventListener;
-import br.com.sfragata.jarcontent.to.JarContentTO;
+import com.github.sfragata.jarcontent.JarContent;
+import com.github.sfragata.jarcontent.gui.tablemodel.JarContentTableModel;
+import com.github.sfragata.jarcontent.listener.EventListener;
+import com.github.sfragata.jarcontent.to.JarContentTO;
 
 @Component
 @Qualifier("eventListener")
@@ -58,12 +58,12 @@ public class JarContentSwixml implements ActionListener, EventListener {
 	public JarContentSwixml(SwingEngine swixml, SwingEngine swixmlDialog,
 			JarContentTableModel jarContentTableModel) throws Exception {
 		this.swixml = swixml;
-		swixml.render("br/com/sfragata/jarcontent/gui/jarcontent.xml");
+		swixml.render("com/github/sfragata/jarcontent/gui/jarcontent.xml");
 		swixml.setActionListener(swixml.getRootComponent(), this);
 		swixml.getRootComponent().setVisible(true);
 		this.swixmlDialog = swixmlDialog;
 		this.dialog = (JDialog) swixmlDialog
-				.render("br/com/sfragata/jarcontent/gui/progress.xml");
+				.render("com/github/sfragata/jarcontent/gui/progress.xml");
 		getTable().setModel(jarContentTableModel);
 	}
 
