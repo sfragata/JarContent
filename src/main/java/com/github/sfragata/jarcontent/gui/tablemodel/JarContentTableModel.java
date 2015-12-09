@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.sfragata.jarcontent.gui.tablemodel;
+package com.github.sfragata.jarcontent.gui.tablemodel;
 
 import java.util.Locale;
 import java.util.Vector;

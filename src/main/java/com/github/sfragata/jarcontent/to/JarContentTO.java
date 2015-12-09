@@ -1,4 +1,4 @@
-package br.com.sfragata.jarcontent.to;
+package com.github.sfragata.jarcontent.to;
 
 import java.io.Serializable;
 
