@@ -35,6 +35,7 @@
 		<keytool-api-1.7.version>1.4</keytool-api-1.7.version>
 		<java.version>1.8</java.version>
 		<swixml-version>1.5.144</swixml-version>
+		<slf4j-version>1.7.13</slf4j-version>
 	</properties>
 	<build>
 		<plugins>
@@ -132,12 +133,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -187,14 +182,19 @@
 			<version>${commons-lang3.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>${commons-logging.version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.sfragata</groupId>
 			<artifactId>Log4JManager</artifactId>
 			<version>${log4jmanager.version}</version>
-		</dependency>
+		</dependency>		
 	</dependencies>
 </project>

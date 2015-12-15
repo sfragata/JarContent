@@ -1,10 +1,7 @@
-/**
- * 
- */
 package com.github.sfragata.jarcontent.gui;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.github.sfragata.jarcontent.config.JarContentConfig;
@@ -16,8 +13,7 @@ import com.github.sfragata.jarcontent.config.JarContentConfig;
  */
 public class JarContentLauncher {
 
-	private static final Log logger = LogFactory
-			.getLog(JarContentLauncher.class);
+	private static final Logger logger = LoggerFactory.getLogger(JarContentLauncher.class);
 
 	/**
 	 * @param args
@@ -31,10 +27,9 @@ public class JarContentLauncher {
 					if (logger.isInfoEnabled()) {
 						logger.info("Starting application...");
 					}
-					new AnnotationConfigApplicationContext(
-							JarContentConfig.class);
+					new AnnotationConfigApplicationContext(JarContentConfig.class);
 				} catch (Exception e) {
-					logger.error(e);
+					logger.error("Error", e);
 				}
 			}
 		});

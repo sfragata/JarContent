@@ -21,8 +21,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
 @Component
 public class JarContent {
 
-	private static Log logger = LogFactory.getLog(JarContent.class);
+	private static Logger logger = LoggerFactory.getLogger(JarContent.class);
 	@Autowired
 	private EventListener eventListener;
 
@@ -74,16 +74,15 @@ public class JarContent {
 		List<Path> jars = findAllJars(jarDir);
 		stopWatch.stop();
 		if (logger.isInfoEnabled()) {
-			logger.info(new StringBuilder("Found ").append(jars.size()).append(" class in directory ").append(jarDir)
-					.append(" in ").append(stopWatch.getLastTaskTimeMillis() / 1000.0).append(" s."));
+			logger.info("Found {} class(es) into directory {} in {} s.", jars.size(),
+					Paths.get(jarDir).toAbsolutePath(), stopWatch.getLastTaskTimeMillis() / 1000.0);
 		}
 		eventListener.setCollectionLength(jars.size());
 		stopWatch.start();
 		int countFiles = 0;
 		for (Path file : jars) {
 			if (logger.isDebugEnabled()) {
-				logger.debug(new StringBuilder("Looking for class ").append(className).append(" into ")
-						.append(file.toString()));
+				logger.debug("Looking for class {} into {}", className, file.toString());
 			}
 			eventListener.setStatus(messageSource.getMessage("SEARCHING_IN_JAR", new Object[] { file.toString() },
 					Locale.getDefault()));
@@ -96,7 +95,7 @@ public class JarContent {
 							JarContentTO fileSelected = new JarContentTO(file.toAbsolutePath().toString(), entry);
 
 							if (logger.isDebugEnabled()) {
-								logger.debug(new StringBuilder("File: ").append(fileSelected));
+								logger.debug("File {}", fileSelected);
 							}
 							eventListener.addResult(fileSelected);
 							countFiles++;
@@ -111,8 +110,8 @@ public class JarContent {
 		}
 		stopWatch.stop();
 		if (logger.isInfoEnabled()) {
-			logger.info(new StringBuilder("End of find, files found: ").append(countFiles).append(" in ")
-					.append(stopWatch.getLastTaskTimeMillis() / 1000.0).append(" s."));
+			logger.info("# {} files found in {} s.", countFiles, stopWatch.getLastTaskTimeMillis() / 1000.0);
+
 		}
 		StringBuilder msg = new StringBuilder();
 		if (countFiles == 0) {

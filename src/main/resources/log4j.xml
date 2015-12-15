@@ -24,7 +24,7 @@
         </layout>
     </appender>
 
-    <category name="br.com.sfragata">
+    <category name="com.github.sfragata">
         <priority value="info" />
     </category>
     <category name="br.com.sfragata.log4jmanager">

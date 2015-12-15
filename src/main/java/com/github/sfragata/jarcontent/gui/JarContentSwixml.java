@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -41,7 +41,11 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
  */
 public class JarContentSwixml implements ActionListener, EventListener {
 
-	private static Log logger = LogFactory.getLog(JarContentSwixml.class);
+	private static final String PROGRESS_XML = "com/github/sfragata/jarcontent/gui/progress.xml";
+
+	private static final String JARCONTENT_XML = "com/github/sfragata/jarcontent/gui/jarcontent.xml";
+
+	private static Logger logger = LoggerFactory.getLogger(JarContentSwixml.class);
 
 	private int dirFileLength;
 	private int maximumProgress = 100;
@@ -55,15 +59,14 @@ public class JarContentSwixml implements ActionListener, EventListener {
 	private JarContent jarContent;
 
 	@Autowired
-	public JarContentSwixml(SwingEngine swixml, SwingEngine swixmlDialog,
-			JarContentTableModel jarContentTableModel) throws Exception {
+	public JarContentSwixml(SwingEngine swixml, SwingEngine swixmlDialog, JarContentTableModel jarContentTableModel)
+			throws Exception {
 		this.swixml = swixml;
-		swixml.render("com/github/sfragata/jarcontent/gui/jarcontent.xml");
+		swixml.render(JARCONTENT_XML);
 		swixml.setActionListener(swixml.getRootComponent(), this);
 		swixml.getRootComponent().setVisible(true);
 		this.swixmlDialog = swixmlDialog;
-		this.dialog = (JDialog) swixmlDialog
-				.render("com/github/sfragata/jarcontent/gui/progress.xml");
+		this.dialog = (JDialog) swixmlDialog.render(PROGRESS_XML);
 		getTable().setModel(jarContentTableModel);
 	}
 
@@ -116,11 +119,9 @@ public class JarContentSwixml implements ActionListener, EventListener {
 		final String clazz = convertClassName(getTextFieldClass().getText());
 		final boolean ignoreCase = getCheckBoxIgnoreCase().isSelected();
 		try {
-			if (StringUtils.isNotBlank(dir) && new File(dir).exists()
-					&& StringUtils.isNotBlank(clazz)) {
+			if (StringUtils.isNotBlank(dir) && new File(dir).exists() && StringUtils.isNotBlank(clazz)) {
 				openProgressDialog();
-				setStatus(messageSource.getMessage("SEARCHING", null,
-						Locale.getDefault()));
+				setStatus(messageSource.getMessage("SEARCHING", null, Locale.getDefault()));
 				Thread thread = new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -131,8 +132,7 @@ public class JarContentSwixml implements ActionListener, EventListener {
 				thread.start();
 
 			} else {
-				setError(messageSource.getMessage("REQUIRED_FIELDS", null,
-						Locale.getDefault()));
+				setError(messageSource.getMessage("REQUIRED_FIELDS", null, Locale.getDefault()));
 			}
 		} catch (Exception e) {
 			error(e);
@@ -150,12 +150,10 @@ public class JarContentSwixml implements ActionListener, EventListener {
 
 			@Override
 			public String getDescription() {
-				return messageSource.getMessage("DIR_JAR", null,
-						Locale.getDefault());
+				return messageSource.getMessage("DIR_JAR", null, Locale.getDefault());
 			}
 		});
-		chooser.setDialogTitle(messageSource.getMessage("OPEN", null,
-				Locale.getDefault()));
+		chooser.setDialogTitle(messageSource.getMessage("OPEN", null, Locale.getDefault()));
 		chooser.setFileHidingEnabled(false);
 		chooser.setMultiSelectionEnabled(false);
 		String currentDir = getCurrentDir();
@@ -163,8 +161,7 @@ public class JarContentSwixml implements ActionListener, EventListener {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == 0) {
-			setTextField("textFieldDir", chooser.getSelectedFile()
-					.getAbsolutePath());
+			setTextField("textFieldDir", chooser.getSelectedFile().getAbsolutePath());
 		}
 	}
 
@@ -184,20 +181,18 @@ public class JarContentSwixml implements ActionListener, EventListener {
 			s.close();
 			setError(s.getBuffer().toString());
 		} catch (IOException ex) {
-			logger.error(ex);
+			logger.error("Error", ex);
 		}
 	}
 
 	void setError(String msg) {
 		JOptionPane.showMessageDialog(swixml.getRootComponent(), msg,
-				messageSource.getMessage("ERROR", null, Locale.getDefault()),
-				JOptionPane.ERROR_MESSAGE);
+				messageSource.getMessage("ERROR", null, Locale.getDefault()), JOptionPane.ERROR_MESSAGE);
 	}
 
 	void setMessage(String msg) {
 		JOptionPane.showMessageDialog(swixml.getRootComponent(), msg,
-				messageSource.getMessage("INFO", null, Locale.getDefault()),
-				JOptionPane.INFORMATION_MESSAGE);
+				messageSource.getMessage("INFO", null, Locale.getDefault()), JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private String convertClassName(String clazz) {
@@ -223,10 +218,8 @@ public class JarContentSwixml implements ActionListener, EventListener {
 
 	@Override
 	public void addResult(JarContentTO contentTO) {
-		DefaultTableModel defaultTableModel = (DefaultTableModel) getTable()
-				.getModel();
-		String[] values = new String[] { contentTO.getJarName(),
-				contentTO.getClassName() };
+		DefaultTableModel defaultTableModel = (DefaultTableModel) getTable().getModel();
+		String[] values = new String[] { contentTO.getJarName(), contentTO.getClassName() };
 		defaultTableModel.addRow(values);
 	}
 
@@ -261,7 +254,7 @@ public class JarContentSwixml implements ActionListener, EventListener {
 		try {
 			dialog.setVisible(true);
 		} catch (Exception ex) {
-			logger.error(ex);
+			logger.error("Error", ex);
 		}
 	}
 }
