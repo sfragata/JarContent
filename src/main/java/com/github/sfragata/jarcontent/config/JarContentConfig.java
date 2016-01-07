@@ -17,7 +17,7 @@ import org.swixml.SwingEngine;
  * 
  */
 @Configuration
-@ComponentScan(basePackages = { "com.github.sfragata" })
+@ComponentScan(basePackages = { "com.github.sfragata", "br.com.sfragata.log4jmanager" })
 @EnableMBeanExport
 public class JarContentConfig {
 
