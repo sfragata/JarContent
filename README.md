@@ -1,6 +1,8 @@
 Jar Content
 ===========
 
+[![Build Status](https://travis-ci.org/sfragata/JarContent.svg?branch=master)](https://travis-ci.org/sfragata/JarContent)
+
 Tool which searches the java class names in a folder
 By giving one 'string ' (which is the name of the class or the part of this one or its package),
 application is going to scan in a folder for all class or package
