@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
@@ -35,7 +34,6 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
 
 @Component
 @Qualifier("eventListener")
-@Profile("prod")
 /**
  * Desktop class (with Swixml framework)
  *

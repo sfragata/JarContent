@@ -22,7 +22,7 @@ public class JarContentLauncher {
         final String[] args) {
 
         final Thread t = new Thread(new Runnable() {
-            @SuppressWarnings("resource")
+            @SuppressWarnings({ "resource", "unused" })
             @Override
             public void run() {
 
@@ -30,7 +30,6 @@ public class JarContentLauncher {
                     if (logger.isInfoEnabled()) {
                         logger.info("Starting application...");
                     }
-                    System.getProperties().setProperty("spring.profiles.active", "prod");
                     new AnnotationConfigApplicationContext(JarContentConfig.class);
                 } catch (final Exception e) {
                     logger.error("Error", e);
