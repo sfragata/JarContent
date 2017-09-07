@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.github.sfragata.jarcontent.config.JarContentConfig;
+import com.github.sfragata.jarcontent.config.JarContentConfigUI;
 
 /**
  * Main class to start the application
@@ -30,7 +30,7 @@ public class JarContentLauncher {
                     if (logger.isInfoEnabled()) {
                         logger.info("Starting application...");
                     }
-                    new AnnotationConfigApplicationContext(JarContentConfig.class);
+                    new AnnotationConfigApplicationContext(JarContentConfigUI.class);
                 } catch (final Exception e) {
                     logger.error("Error", e);
                 }
