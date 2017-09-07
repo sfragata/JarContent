@@ -27,9 +27,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.swixml.SwingEngine;
 
-import com.github.sfragata.jarcontent.JarContent;
 import com.github.sfragata.jarcontent.gui.tablemodel.JarContentTableModel;
 import com.github.sfragata.jarcontent.listener.EventListener;
+import com.github.sfragata.jarcontent.main.JarContent;
 import com.github.sfragata.jarcontent.to.JarContentTO;
 
 @Component
@@ -202,8 +202,7 @@ public class JarContentSwixml
     public void error(
         final Exception e) {
 
-        try {
-            final StringWriter s = new StringWriter();
+        try (final StringWriter s = new StringWriter()) {
             e.printStackTrace(new PrintWriter(s));
             s.flush();
             s.close();

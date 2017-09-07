@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.github.sfragata.jarcontent;
+package com.github.sfragata.jarcontent.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +11,10 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
-import java.util.function.BiPredicate;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
@@ -39,29 +37,25 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
 @Component
 public class JarContent {
 
-    private static Logger logger = LoggerFactory.getLogger(JarContent.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JarContent.class);
 
     @Autowired
     private EventListener eventListener;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     private List<Path> findAllJars(
         final String jarDirPath) {
 
         try {
-            return Files.find(Paths.get(jarDirPath), 9999, new BiPredicate<Path, BasicFileAttributes>() {
-                @Override
-                public boolean test(
-                    final Path t,
-                    final BasicFileAttributes u) {
-
-                    try {
-                        return t.getFileName().toString().endsWith(".jar") && Files.size(t) > 0;
-                    } catch (final IOException e) {
-                        return false;
-                    }
+            return Files.find(Paths.get(jarDirPath), 9999, (
+                file,
+                basicFileAttributes) -> {
+                try {
+                    return file.getFileName().toString().endsWith(".jar") && Files.size(file) > 0;
+                } catch (final IOException e) {
+                    return false;
                 }
             }, FileVisitOption.FOLLOW_LINKS).parallel().collect(Collectors.toList());
         } catch (final IOException e) {
@@ -74,23 +68,23 @@ public class JarContent {
         final String className,
         final boolean ignoreCase) {
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("Searching...");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Searching...");
         }
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         final List<Path> jars = findAllJars(jarDir);
         stopWatch.stop();
-        if (logger.isInfoEnabled()) {
-            logger.info("Found {} class(es) into directory {} in {} s.", jars.size(),
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("Found {} class(es) into directory {} in {} s.", jars.size(),
                 Paths.get(jarDir).toAbsolutePath(), stopWatch.getLastTaskTimeMillis() / 1000.0);
         }
         this.eventListener.setCollectionLength(jars.size());
         stopWatch.start();
         int countFiles = 0;
         for (final Path file : jars) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Looking for class {} into {}", className, file.toString());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Looking for class {} into {}", className, file.toString());
             }
             this.eventListener.setStatus(this.messageSource.getMessage("SEARCHING_IN_JAR",
                 new Object[] { file.toString() }, Locale.getDefault()));
@@ -102,8 +96,8 @@ public class JarContent {
                         if (isEquals(className, ignoreCase, entry)) {
                             final JarContentTO fileSelected = new JarContentTO(file.toAbsolutePath().toString(), entry);
 
-                            if (logger.isDebugEnabled()) {
-                                logger.debug("File {}", fileSelected);
+                            if (LOGGER.isDebugEnabled()) {
+                                LOGGER.debug("File {}", fileSelected);
                             }
                             this.eventListener.addResult(fileSelected);
                             countFiles++;
@@ -111,14 +105,14 @@ public class JarContent {
                     }
                 }
             } catch (final IOException e) {
-                logger.error("Error in file " + file.toAbsolutePath().toString(), e);
+                LOGGER.error("Error in file " + file.toAbsolutePath().toString(), e);
                 this.eventListener.error(e);
             }
             this.eventListener.increaseProgress();
         }
         stopWatch.stop();
-        if (logger.isInfoEnabled()) {
-            logger.info("# {} files found in {} s.", countFiles, stopWatch.getLastTaskTimeMillis() / 1000.0);
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("# {} files found in {} s.", countFiles, stopWatch.getLastTaskTimeMillis() / 1000.0);
 
         }
         final StringBuilder msg = new StringBuilder();

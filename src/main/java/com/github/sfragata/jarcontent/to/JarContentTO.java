@@ -4,82 +4,98 @@ import java.io.Serializable;
 
 /**
  * Transfer Object
- * 
+ *
  * @author Fragata da Silva, Silvio
  */
-public class JarContentTO implements Serializable {
+public class JarContentTO
+    implements Serializable {
 
-	private static final long serialVersionUID = -1L;
-	private String jarName;
-	private String className;
+    private static final long serialVersionUID = -1L;
 
-	public JarContentTO(String jarName, String className) {
-		this.jarName = jarName;
-		this.className = className;
-	}
+    private String jarName;
 
-	@Override
-	public String toString() {
-		return new StringBuilder("JarContentTO{jarName='").append(jarName)
-				.append("', className='").append(className).append("'}")
-				.toString();
-	}
+    private String className;
 
-	public String getClassName() {
-		return className;
-	}
+    public JarContentTO(final String jarName, final String className) {
+        this.jarName = jarName;
+        this.className = className;
+    }
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+    @Override
+    public String toString() {
 
-	public String getJarName() {
-		return jarName;
-	}
+        return new StringBuilder("JarContentTO{jarName='").append(this.jarName).append("', className='")
+            .append(this.className).append("'}").toString();
+    }
 
-	public void setJarName(String jarName) {
-		this.jarName = jarName;
-	}
+    public String getClassName() {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((className == null) ? 0 : className.hashCode());
-		result = prime * result + ((jarName == null) ? 0 : jarName.hashCode());
-		return result;
-	}
+        return this.className;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		JarContentTO other = (JarContentTO) obj;
-		if (className == null) {
-			if (other.className != null)
-				return false;
-		} else if (!className.equals(other.className))
-			return false;
-		if (jarName == null) {
-			if (other.jarName != null)
-				return false;
-		} else if (!jarName.equals(other.jarName))
-			return false;
-		return true;
-	}
+    public void setClassName(
+        final String className) {
+
+        this.className = className;
+    }
+
+    public String getJarName() {
+
+        return this.jarName;
+    }
+
+    public void setJarName(
+        final String jarName) {
+
+        this.jarName = jarName;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (this.className == null ? 0 : this.className.hashCode());
+        result = prime * result + (this.jarName == null ? 0 : this.jarName.hashCode());
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(
+        final Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final JarContentTO other = (JarContentTO) obj;
+        if (this.className == null) {
+            if (other.className != null) {
+                return false;
+            }
+        } else if (!this.className.equals(other.className)) {
+            return false;
+        }
+        if (this.jarName == null) {
+            if (other.jarName != null) {
+                return false;
+            }
+        } else if (!this.jarName.equals(other.jarName)) {
+            return false;
+        }
+        return true;
+    }
 }

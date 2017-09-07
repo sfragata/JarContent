@@ -1,4 +1,7 @@
-package com.github.sfragata.jarcontent;
+package com.github.sfragata.jarcontent.main;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,21 +23,16 @@ public class JarContentTest {
     @Autowired
     private JarContent jarContent;
 
+    @Autowired
+    private EventFakeListener eventFakeListener;
+
     @Test
     public void shouldNotGetError() {
 
         this.jarContent.findJars(".", "parallel", true);
+        assertNotNull(this.eventFakeListener);
+        assertNotNull(this.eventFakeListener.getJarContentList());
+        assertFalse(this.eventFakeListener.getJarContentList().isEmpty());
     }
 
-    // @Test
-    // public void nioFileTest1() throws IOException {
-    // Files.find(Paths.get("/home/ssilva/.m2/repository"), 99, new
-    // BiPredicate<Path,BasicFileAttributes>(){
-    // @Override
-    // public boolean test(Path t, BasicFileAttributes u) {
-    // return t.getFileName().toString().endsWith(".jar");
-    // }}, FileVisitOption.FOLLOW_LINKS).forEach((action) -> {
-    // System.out.println(action);
-    // });
-    // }
 }
