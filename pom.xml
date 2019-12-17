@@ -23,19 +23,18 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.25.RELEASE</spring.version>
-		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-		<maven-source-plugin.version>2.4</maven-source-plugin.version>
-		<appassembler-maven-plugin.version>1.10</appassembler-maven-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+		<appassembler-maven-plugin.version>2.1.0</appassembler-maven-plugin.version>
 		<webstart-maven-plugin.version>1.0-beta-6</webstart-maven-plugin.version>
 		<junit.version>4.12</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
-		<commons-logging.version>1.2</commons-logging.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
 		<log4jmanager.version>1.0</log4jmanager.version>
 		<keytool-api-1.7.version>1.4</keytool-api-1.7.version>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<swixml-version>1.5.144</swixml-version>
-		<slf4j-version>1.7.13</slf4j-version>
+		<slf4j-version>1.7.29</slf4j-version>
 	</properties>
 	<build>
 		<plugins>
@@ -44,11 +43,12 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<release>${java.version}</release>
+					<compilerArgs>
+						<arg>-Xlint:unchecked</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -74,17 +74,17 @@
 							<name>jarcontent</name>
 						</program>
 					</programs>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>assemble</goal>
-							</goals>
-						</execution>
-					</executions>
 					<repositoryLayout>flat</repositoryLayout>
 					<repositoryName>lib</repositoryName>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>assemble</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>

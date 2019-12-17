@@ -68,15 +68,6 @@ public class JarContentTableModel
      * @param data
      * @param columnNames
      */
-    @SuppressWarnings("rawtypes")
-    public JarContentTableModel(final Vector data, final Vector columnNames) {
-        super(data, columnNames);
-    }
-
-    /**
-     * @param data
-     * @param columnNames
-     */
     public JarContentTableModel(final Object[][] data, final Object[] columnNames) {
         super(data, columnNames);
     }
