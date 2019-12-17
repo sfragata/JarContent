@@ -22,7 +22,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.25.RELEASE</spring.version>
+		<spring.version>5.2.2.RELEASE</spring.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-source-plugin.version>3.2.0</maven-source-plugin.version>
 		<appassembler-maven-plugin.version>2.1.0</appassembler-maven-plugin.version>
@@ -62,7 +62,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>appassembler-maven-plugin</artifactId>
@@ -71,7 +70,7 @@
 					<programs>
 						<program>
 							<mainClass>com.github.sfragata.jarcontent.gui.JarContentLauncher</mainClass>
-							<name>jarcontent</name>
+							<id>jarcontent</id>
 						</program>
 					</programs>
 					<repositoryLayout>flat</repositoryLayout>
