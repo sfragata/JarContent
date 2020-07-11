@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.github.sfragata.jarcontent.main;
 
 import java.io.File;
@@ -88,7 +85,7 @@ public class JarContent {
             }
             this.eventListener.setStatus(this.messageSource.getMessage("SEARCHING_IN_JAR",
                 new Object[] { file.toString() }, Locale.getDefault()));
-            try (JarFile jar = getURLContent(file.toAbsolutePath().toString());) {
+            try (JarFile jar = getURLContent(file.toAbsolutePath().toString())) {
                 final Enumeration<JarEntry> entries = jar.entries();
                 while (entries.hasMoreElements()) {
                     final String entry = entries.nextElement().getName();
@@ -141,7 +138,7 @@ public class JarContent {
                 ? 0
                 : entryJarFileString.lastIndexOf(File.separator));
 
-        return entryJarFileString.indexOf(patternClass) != -1;
+        return entryJarFileString.contains(patternClass);
     }
 
     private String getExtension(
@@ -157,13 +154,11 @@ public class JarContent {
         final String jarFile)
         throws IOException {
 
-        URL url = null;
-        JarURLConnection urlCon = null;
         // local archive
-        url = new URL("jar:file:///" + jarFile + "!/");
+        URL url = new URL("jar:file:///" + jarFile + "!/");
         // remote archive
         // url=new URL("jar:http://.../archive.jar!/");
-        urlCon = (JarURLConnection) url.openConnection();
+        JarURLConnection urlCon = (JarURLConnection) url.openConnection();
         return urlCon.getJarFile();
     }
 }

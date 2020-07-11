@@ -1,5 +1,20 @@
 language: java
+
+cache:
+  directories:
+    - $HOME/.m2
+
 jdk:
   - openjdk11
   - openjdk13
-script: mvn clean verify
+
+matrix:
+  include:
+  - jdk: openjdk11
+    env: JAVA_VERSION="11"
+  - jdk: openjdk13
+    env: JAVA_VERSION="13"
+
+script:
+  - echo "Building project with java version ${JAVA_VERSION}"
+  - mvn clean verify -Djava.version=${JAVA_VERSION}
