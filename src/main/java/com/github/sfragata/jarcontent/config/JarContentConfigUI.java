@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.github.sfragata.jarcontent.config;
 
 import org.springframework.context.annotation.Bean;
@@ -23,15 +20,13 @@ public class JarContentConfigUI {
     @Bean
     public SwingEngine swixml() {
 
-        final SwingEngine swixml = new SwingEngine();
-        return swixml;
+        return new SwingEngine();
     }
 
     @Bean
     public SwingEngine swixmlDialog() {
 
-        final SwingEngine swixml = new SwingEngine();
-        return swixml;
+        return new SwingEngine();
     }
 
 }

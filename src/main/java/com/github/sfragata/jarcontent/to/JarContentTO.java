@@ -24,8 +24,8 @@ public class JarContentTO
     @Override
     public String toString() {
 
-        return new StringBuilder("JarContentTO{jarName='").append(this.jarName).append("', className='")
-            .append(this.className).append("'}").toString();
+        return "JarContentTO{jarName='" + this.jarName + "', className='" +
+                this.className + "'}";
     }
 
     public String getClassName() {
@@ -90,12 +90,7 @@ public class JarContentTO
             return false;
         }
         if (this.jarName == null) {
-            if (other.jarName != null) {
-                return false;
-            }
-        } else if (!this.jarName.equals(other.jarName)) {
-            return false;
-        }
-        return true;
+            return other.jarName == null;
+        } else return this.jarName.equals(other.jarName);
     }
 }

@@ -34,11 +34,6 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
 
 @Component
 @Qualifier("eventListener")
-/**
- * Desktop class (with Swixml framework)
- *
- * @author Fragata da Silva, Silvio
- */
 public class JarContentSwixml
     implements ActionListener, EventListener {
 
@@ -46,7 +41,7 @@ public class JarContentSwixml
 
     private static final String JARCONTENT_XML = "com/github/sfragata/jarcontent/gui/jarcontent.xml";
 
-    private static Logger logger = LoggerFactory.getLogger(JarContentSwixml.class);
+    private static final Logger logger = LoggerFactory.getLogger(JarContentSwixml.class);
 
     private int dirFileLength;
 
@@ -142,13 +137,7 @@ public class JarContentSwixml
             if (StringUtils.isNotBlank(dir) && new File(dir).exists() && StringUtils.isNotBlank(clazz)) {
                 openProgressDialog();
                 setStatus(this.messageSource.getMessage("SEARCHING", null, Locale.getDefault()));
-                final Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        JarContentSwixml.this.jarContent.findJars(dir, clazz, ignoreCase);
-                    }
-                });
+                final Thread thread = new Thread(() -> JarContentSwixml.this.jarContent.findJars(dir, clazz, ignoreCase));
                 thread.setName("JarContent");
                 thread.start();
 
@@ -232,8 +221,7 @@ public class JarContentSwixml
         if (StringUtils.isBlank(clazz)) {
             return clazz;
         }
-        final String clazzString = clazz.replaceAll("\\.", "/");
-        return clazzString;
+        return clazz.replaceAll("\\.", "/");
     }
 
     int calculateProgressValue() {

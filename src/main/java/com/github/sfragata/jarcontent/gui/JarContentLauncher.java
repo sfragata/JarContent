@@ -11,6 +11,7 @@ import com.github.sfragata.jarcontent.config.JarContentConfigUI;
  *
  * @author Fragata da Silva, Silvio
  */
+@SuppressWarnings("JavaDoc")
 public class JarContentLauncher {
 
     private static final Logger logger = LoggerFactory.getLogger(JarContentLauncher.class);
@@ -21,19 +22,15 @@ public class JarContentLauncher {
     public static void main(
         final String[] args) {
 
-        final Thread t = new Thread(new Runnable() {
-            @SuppressWarnings({ "resource", "unused" })
-            @Override
-            public void run() {
+        final Thread t = new Thread(() -> {
 
-                try {
-                    if (logger.isInfoEnabled()) {
-                        logger.info("Starting application...");
-                    }
-                    new AnnotationConfigApplicationContext(JarContentConfigUI.class);
-                } catch (final Exception e) {
-                    logger.error("Error", e);
+            try {
+                if (logger.isInfoEnabled()) {
+                    logger.info("Starting application...");
                 }
+                new AnnotationConfigApplicationContext(JarContentConfigUI.class);
+            } catch (final Exception e) {
+                logger.error("Error", e);
             }
         });
         t.setName("JarContentLauncher");

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.github.sfragata.jarcontent.config;
 
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.github.sfragata.jarcontent.gui.tablemodel;
 
 import java.util.Locale;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Component;
  * @see javax.swing.table.DefaultTableModel
  *
  */
+@SuppressWarnings("JavaDoc")
 @Component
 public class JarContentTableModel
     extends DefaultTableModel {
@@ -51,7 +49,6 @@ public class JarContentTableModel
      * @param columnNames
      * @param rowCount
      */
-    @SuppressWarnings("rawtypes")
     public JarContentTableModel(final Vector columnNames, final int rowCount) {
         super(columnNames, rowCount);
     }

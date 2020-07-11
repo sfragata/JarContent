@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.github.sfragata.jarcontent.listener;
 
 import com.github.sfragata.jarcontent.to.JarContentTO;
@@ -13,13 +10,13 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
  */
 public interface EventListener {
 
-	public void addResult(JarContentTO contentTO);
+	void addResult(JarContentTO contentTO);
 
-	public void increaseProgress();
+	void increaseProgress();
 
-	public void setCollectionLength(int length);
+	void setCollectionLength(int length);
 
-	public void setStatus(String msg);
+	void setStatus(String msg);
 
-	public void error(Exception e);
+	void error(Exception e);
 }
