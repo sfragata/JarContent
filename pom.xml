@@ -12,13 +12,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>5.2.2.RELEASE</spring.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-source-plugin.version>3.2.0</maven-source-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<appassembler-maven-plugin.version>2.1.0</appassembler-maven-plugin.version>
 		<webstart-maven-plugin.version>1.0-beta-6</webstart-maven-plugin.version>
 		<junit.version>4.13.1</junit.version>
 		<log4j.version>2.13.3</log4j.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
-		<log4jmanager.version>1.0</log4jmanager.version>
 		<keytool-api-1.7.version>1.4</keytool-api-1.7.version>
 		<java.version>11</java.version>
 		<swixml-version>1.5.144</swixml-version>
@@ -142,6 +141,7 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -153,6 +153,7 @@
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.swixml</groupId>
 			<artifactId>swixml</artifactId>
