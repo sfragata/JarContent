@@ -35,7 +35,7 @@ import com.github.sfragata.jarcontent.to.JarContentTO;
 @Component
 @Qualifier("eventListener")
 public class JarContentSwixml
-    implements ActionListener, EventListener {
+        implements ActionListener, EventListener {
 
     private static final String PROGRESS_XML = "com/github/sfragata/jarcontent/gui/progress.xml";
 
@@ -61,9 +61,9 @@ public class JarContentSwixml
 
     @Autowired
     public JarContentSwixml(
-        final SwingEngine swixml,
-        final SwingEngine swixmlDialog,
-        final JarContentTableModel jarContentTableModel) throws Exception {
+            final SwingEngine swixml,
+            final SwingEngine swixmlDialog,
+            final JarContentTableModel jarContentTableModel) throws Exception {
         this.swixml = swixml;
         swixml.render(JARCONTENT_XML);
         swixml.setActionListener(swixml.getRootComponent(), this);
@@ -75,7 +75,7 @@ public class JarContentSwixml
 
     @Override
     public void actionPerformed(
-        final ActionEvent e) {
+            final ActionEvent e) {
 
         final String command = e.getActionCommand();
         if ("QUIT".equals(command)) {
@@ -108,8 +108,8 @@ public class JarContentSwixml
     }
 
     private void setTextField(
-        final String textField,
-        final String value) {
+            final String textField,
+            final String value) {
 
         ((JTextField) this.swixml.find(textField)).setText(value);
     }
@@ -137,9 +137,8 @@ public class JarContentSwixml
             if (StringUtils.isNotBlank(dir) && new File(dir).exists() && StringUtils.isNotBlank(clazz)) {
                 openProgressDialog();
                 setStatus(this.messageSource.getMessage("SEARCHING", null, Locale.getDefault()));
-                final Thread thread = new Thread(() -> JarContentSwixml.this.jarContent.findJars(dir, clazz, ignoreCase));
-                thread.setName("JarContent");
-                thread.start();
+
+                Thread.ofVirtual().name("JarContent").start(() -> JarContentSwixml.this.jarContent.findJars(dir, clazz, ignoreCase));
 
             } else {
                 setError(this.messageSource.getMessage("REQUIRED_FIELDS", null, Locale.getDefault()));
@@ -156,7 +155,7 @@ public class JarContentSwixml
 
             @Override
             public boolean accept(
-                final File pathname) {
+                    final File pathname) {
 
                 return pathname.isDirectory();
             }
@@ -189,7 +188,7 @@ public class JarContentSwixml
 
     @Override
     public void error(
-        final Exception e) {
+            final Exception e) {
 
         try (final StringWriter s = new StringWriter()) {
             e.printStackTrace(new PrintWriter(s));
@@ -202,21 +201,21 @@ public class JarContentSwixml
     }
 
     void setError(
-        final String msg) {
+            final String msg) {
 
         JOptionPane.showMessageDialog(this.swixml.getRootComponent(), msg,
-            this.messageSource.getMessage("ERROR", null, Locale.getDefault()), JOptionPane.ERROR_MESSAGE);
+                this.messageSource.getMessage("ERROR", null, Locale.getDefault()), JOptionPane.ERROR_MESSAGE);
     }
 
     void setMessage(
-        final String msg) {
+            final String msg) {
 
         JOptionPane.showMessageDialog(this.swixml.getRootComponent(), msg,
-            this.messageSource.getMessage("INFO", null, Locale.getDefault()), JOptionPane.INFORMATION_MESSAGE);
+                this.messageSource.getMessage("INFO", null, Locale.getDefault()), JOptionPane.INFORMATION_MESSAGE);
     }
 
     private String convertClassName(
-        final String clazz) {
+            final String clazz) {
 
         if (StringUtils.isBlank(clazz)) {
             return clazz;
@@ -235,7 +234,7 @@ public class JarContentSwixml
     }
 
     private void setProgressValue(
-        final int value) {
+            final int value) {
 
         getJProgressBar().setValue(value);
         getJProgressBar().setString(value + "%");
@@ -243,10 +242,10 @@ public class JarContentSwixml
 
     @Override
     public void addResult(
-        final JarContentTO contentTO) {
+            final JarContentTO contentTO) {
 
         final DefaultTableModel defaultTableModel = (DefaultTableModel) getTable().getModel();
-        final String[] values = new String[] { contentTO.getJarName(), contentTO.getClassName() };
+        final String[] values = new String[]{contentTO.getJarName(), contentTO.getClassName()};
         defaultTableModel.addRow(values);
     }
 
@@ -266,21 +265,21 @@ public class JarContentSwixml
 
     @Override
     public void setCollectionLength(
-        final int length) {
+            final int length) {
 
         this.dirFileLength = length;
     }
 
     @Override
     public void setStatus(
-        final String msg) {
+            final String msg) {
 
         setLableTextResult("labelResult", msg);
     }
 
     private void setLableTextResult(
-        final String label,
-        final String value) {
+            final String label,
+            final String value) {
 
         ((JLabel) this.swixmlDialog.find(label)).setText(value);
     }
