@@ -22,7 +22,7 @@
 		<java.version>21</java.version>
 		<swixml-version>1.5.144</swixml-version>
 		<slf4j-version>2.0.5</slf4j-version>
-		<jdom.version>2.0.2</jdom.version>
+		<jdom.version>1.1</jdom.version>
 	</properties>
 	<build>
 		<plugins>
@@ -170,7 +170,7 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.jdom</groupId>
+			<groupId>jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<version>${jdom.version}</version>
 		</dependency>
