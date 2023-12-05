@@ -15,7 +15,7 @@
 		layout="FlowLayout">
             <label name="labelClass" text="CLASS"/>
             <textfield name="textFieldClass" columns="36" id="textFieldClass"/>
-            <checkbox text="IGNORE_CASE" mnemonic="VK_I" id="ignoreCase" ></checkbox>
+            <checkbox text="IGNORE_CASE" mnemonic="VK_I" id="ignoreCase" />
             <button name="buttonSearch" text="SEARCH" actioncommand="SEARCH" mnemonic="VK_S" defaultcapable="true"/>
         </panel>
     </panel>

@@ -18,10 +18,10 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.github.sfragata" level="debug">
+        <Logger name="com.github.sfragata" level="debug" additivity="false">
             <AppenderRef ref="APP_LOG_FILE"/>
         </Logger>
-        <Logger name="org.springframework" level="info">
+        <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="APP_LOG_FILE"/>
         </Logger>
         <Root level="info">

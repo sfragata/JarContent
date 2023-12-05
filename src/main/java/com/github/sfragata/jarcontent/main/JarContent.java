@@ -3,6 +3,8 @@ package com.github.sfragata.jarcontent.main;
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
@@ -45,16 +47,16 @@ public class JarContent {
     private List<Path> findAllJars(
         final String jarDirPath) {
 
-        try {
-            return Files.find(Paths.get(jarDirPath), 9999, (
+        try (var files = Files.find(Paths.get(jarDirPath), 9999, (
                 file,
                 basicFileAttributes) -> {
-                try {
-                    return file.getFileName().toString().endsWith(".jar") && Files.size(file) > 0;
-                } catch (final IOException e) {
-                    return false;
-                }
-            }, FileVisitOption.FOLLOW_LINKS).parallel().collect(Collectors.toList());
+            try {
+                return file.getFileName().toString().endsWith(".jar") && Files.size(file) > 0;
+            } catch (final IOException e) {
+                return false;
+            }
+        }, FileVisitOption.FOLLOW_LINKS)){
+            return files.parallel().collect(Collectors.toList());
         } catch (final IOException e) {
             return Collections.emptyList();
         }
@@ -101,9 +103,9 @@ public class JarContent {
                         }
                     }
                 }
-            } catch (final IOException e) {
-                LOGGER.error("Error in file " + file.toAbsolutePath().toString(), e);
-                this.eventListener.error(e);
+            } catch (final IOException | URISyntaxException exception) {
+                LOGGER.error("Error in file " + file.toAbsolutePath().toString(), exception);
+                this.eventListener.error(exception);
             }
             this.eventListener.increaseProgress();
         }
@@ -152,10 +154,10 @@ public class JarContent {
 
     private JarFile getURLContent(
         final String jarFile)
-        throws IOException {
+            throws IOException, URISyntaxException {
 
         // local archive
-        URL url = new URL("jar:file:///" + jarFile + "!/");
+        URL url = new URI("jar:file:///" + jarFile + "!/").toURL();
         // remote archive
         // url=new URL("jar:http://.../archive.jar!/");
         JarURLConnection urlCon = (JarURLConnection) url.openConnection();

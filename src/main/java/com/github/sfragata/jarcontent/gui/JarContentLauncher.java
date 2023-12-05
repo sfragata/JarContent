@@ -20,20 +20,16 @@ public class JarContentLauncher {
      * @param args
      */
     public static void main(
-        final String[] args) {
-
-        final Thread t = new Thread(() -> {
-
-            try {
+            final String[] args) {
+        try {
+            Thread.ofVirtual().name("JarContentLauncher").start(() -> {
                 if (logger.isInfoEnabled()) {
                     logger.info("Starting application...");
                 }
                 new AnnotationConfigApplicationContext(JarContentConfigUI.class);
-            } catch (final Exception e) {
-                logger.error("Error", e);
-            }
-        });
-        t.setName("JarContentLauncher");
-        t.start();
+            }).join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
